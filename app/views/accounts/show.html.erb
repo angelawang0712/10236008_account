@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>deadline:</strong>
+  <%= @account.deadline %>
+</p>
+
+<p>
+  <strong>title:</strong>
+  <%= @account.title.try(:name) %>
+</p>
+
+<p>
+  <strong>price: </strong>
+  <%= @account.price %>
+<p>
+
+<%= link_to 'Edit', edit_account_path(@account) %> |
+<%= link_to 'Back', accounts_path %>
