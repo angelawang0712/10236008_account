@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'bootstrap-sass'
+# gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
