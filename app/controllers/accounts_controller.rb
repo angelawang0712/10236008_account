@@ -6,7 +6,7 @@ class AccountsController < ApplicationController
   def index
     @accounts = Account.order(:deadline)
     @grouped_months = @accounts.group_by { |r| r.deadline.beginning_of_month}
-    # @total =  Account.sum(:price)
+    @all_total =  Account.sum(:price)
   end
 
   # GET /accounts/1

@@ -6,11 +6,21 @@
 
 <% @grouped_months.keys.sort.each do |month| %>  
 <h2><%= month.strftime("%B %Y") %></h2>  
-
     
+    <% @total=0 %>
     <table class="table table-hover">
+      
       <tbody>
+        <thead>
+          <tr>
+            <th>日期</th>
+            <th>項目</th>
+            <th>金額</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
         <% for account in @grouped_months[month] %>
+           
           <tr>
             <td><%= account.deadline %></td>
       			<td><%= link_to account.title.try(:name), account_path(account) %></td>
@@ -19,42 +29,56 @@
             <td><%= link_to 'Edit', edit_account_path(account) ,class:'btn btn-warning'%></td>
             <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' },class:'btn btn-danger' %></td>
           </tr>
-          <% end %> 
+         <% @total+=account.price %>
+         
+         <% end %>
           <tr>
-            <td></td>
-            <td>總計</td>
-            <td colspan="3"><%= Account.sum(:price) %></td>
+            <th></th>
+            <th>月總計</th>
+            <th colspan="3"><%= @total %></th>
           </tr>
+        
       </tbody>
     </table>
     <!--<p><b><%= account.deadline.to_s(:long) %></b><%= account.title.try(:name) %> <%= account.price.to_s(:long) %></p>  -->
-<% end %>  
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th><%= t("account.deadline") %></th>
-  		<th><%= t("account.title") %></th>
-  		<th><%= t("account.price") %></th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
+<% end %>
+<table class="table">
   <tbody>
-    <% @accounts.each do |account| %>
-      <tr>
-        <td><%= account.deadline %></td>
-  			<td><%= link_to account.title.try(:name), account_path(account) %></td>
-  			<td><%= account.price %></td>
-        <!--<td><%= link_to 'Show', account ,class:'btn btn-success'%></td>-->
-        <td><%= link_to 'Edit', edit_account_path(account) ,class:'btn btn-warning'%></td>
-        <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' },class:'btn btn-danger' %></td>
-      </tr>
-    <% end %>
-      <tr>
-        <td></td>
-        <td>總計</td>
-        <td colspan="3"><%= Account.sum(:price) %></td>
-      </tr>
-  </tbody>
+     <thead>
+        <tr>
+          <th>總計</th>
+          <th><%= @all_total %></th>
+          <th></th>
+        </tr>
+      </thead>
+  </tbody>      
 </table>
+
+<!--<table class="table table-hover">-->
+<!--  <thead>-->
+<!--    <tr>-->
+<!--      <th><%= t("account.deadline") %></th>-->
+<!--  		<th><%= t("account.title") %></th>-->
+<!--  		<th><%= t("account.price") %></th>-->
+<!--      <th colspan="3"></th>-->
+<!--    </tr>-->
+<!--  </thead>-->
+
+<!--  <tbody>-->
+<!--    <% @accounts.each do |account| %>-->
+<!--      <tr>-->
+<!--        <td><%= account.deadline %></td>-->
+<!--  			<td><%= link_to account.title.try(:name), account_path(account) %></td>-->
+<!--  			<td><%= account.price %></td>-->
+        <!--<td><%= link_to 'Show', account ,class:'btn btn-success'%></td>-->
+<!--        <td><%= link_to 'Edit', edit_account_path(account) ,class:'btn btn-warning'%></td>-->
+<!--        <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' },class:'btn btn-danger' %></td>-->
+<!--      </tr>-->
+<!--    <% end %>-->
+<!--      <tr>-->
+<!--        <td></td>-->
+<!--        <td>總計</td>-->
+<!--        <td colspan="3"><%= Account.sum(:price) %></td>-->
+<!--      </tr>-->
+<!--  </tbody>-->
+<!--</table>-->
