@@ -11,10 +11,10 @@ class AccountsController < ApplicationController
     # (1..12).each {|m| @months << m}
     @month_details = []
     @month_costs = []
-    (1..12).each do |i|
-     @months[i]
-     @month_details[i] = Account.where(["date_part('month',buyday) = ? and date_part('year',buyday) = ?" , @month_num[i],2015]).order('buyday desc')
-     @month_costs[i] = Account.where(["date_part('month',buyday) = ? and date_part('year',buyday) = ?" , @month_num[i],2015]).sum(:spendmoney)
+    (0..11).each do |i|
+     @months[i]=i+1
+     @month_details[i] = Account.where(["date_part('month',deadline) = ? and date_part('year',deadline) = ?" , @months[i],2015]).order('deadline desc')
+     @month_costs[i] = Account.where(["date_part('month',deadline) = ? and date_part('year',deadline) = ?" , @months[i],2015]).sum(:price)
    end
     
   end
