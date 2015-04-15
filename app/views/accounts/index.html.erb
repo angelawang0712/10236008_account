@@ -3,7 +3,6 @@
 <h1>Listing Accounts</h1>
 <%= link_to 'New Account', new_account_path ,class:'btn btn-success btn-lg'%>
 
-
     <div role="tabpanel">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist" id="myTab">
@@ -26,7 +25,6 @@
                   <th colspan="3"></th>
                 </tr>
               </thead>
-               
                <% @total=0 %>
                <% @month_details[i].each do |account| %>  
                 <tr>
@@ -36,8 +34,8 @@
                   <td><%= link_to 'Edit', edit_account_path(account) ,class:'btn btn-warning'%></td>
                   <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' },class:'btn btn-danger' %></td>
                 </tr>
-               <% end %> 
                <% @total+=account.price %>
+               <% end %>
                 <tr>
                   <th></th>
                   <th>月總計</th>
