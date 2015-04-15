@@ -3,7 +3,7 @@
 <h1>Listing Accounts</h1>
 <%= link_to 'New Account', new_account_path ,class:'btn btn-success btn-lg'%>
 
-<% @grouped_months.keys.sort.each do |month| %>  
+<!--<% @grouped_months.keys.sort.each do |month| %>  <% end %> -->
 <!--<h2><%= month.strftime("%B %Y") %></h2>  -->
     
     <% @total=0 %>
@@ -12,7 +12,7 @@
       <ul class="nav nav-tabs" role="tablist" id="myTab">
          <% (0..11).each do |i| %>
           <li role="presentation"><a href="#<%= @months[i] %>" role="tab" data-toggle="tab"><%= @months[i] %>月</a></li>
-        <% end %>
+         <% end %>
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">
@@ -28,7 +28,7 @@
                   <th colspan="3"></th>
                 </tr>
               </thead>
-               <!--<% for account in @grouped_months[month] %><% end%>-->
+               <!--<% for account in @grouped_months[month] %><% end %>-->
                 <tr>
                   <td><%= account.deadline %></td>
             			<td><%= link_to account.title, account_path(account) %></td>
@@ -60,9 +60,8 @@
           </thead>
       </tbody>      
     </table>
- <% end %>
-<script>
 
+<script>
 $('#myTab a').click(function (e) {
   e.preventDefault()
   $(this).tab('show')
