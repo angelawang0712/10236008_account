@@ -15,7 +15,7 @@
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist" id="myTab">
         
-         <% (1..11).each do |i| %>
+         <% (0..11).each do |i| %>
           <li role="presentation"><a href="#<%= @months[i] %>" role="tab" data-toggle="tab"><%= @months[i] %>月</a></li>
         <% end %>
       </ul>
@@ -23,9 +23,9 @@
       <!-- Tab panes -->
       <div class="tab-content">
         
-         <% (1..11).each do |i| %>
+         <% (0..11).each do |i| %>
           <div role="tabpanel" class="tab-pane" id="<%= @months[i] %>" ><%= @months[i] %>月
-         <% end %>
+        
           
           <table class="table table-hover">
             <tbody>
