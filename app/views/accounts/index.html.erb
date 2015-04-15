@@ -14,9 +14,7 @@
     
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist" id="myTab">
-        <!--<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>-->
-        <!--<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>-->
-        <!--<li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>-->
+        
          <% (1..11).each do |i| %>
           <li role="presentation"><a href="#<%= @months[i] %>" role="tab" data-toggle="tab"><%= @months[i] %>月</a></li>
         <% end %>
@@ -24,9 +22,7 @@
     
       <!-- Tab panes -->
       <div class="tab-content">
-        <!--<div role="tabpanel" class="tab-pane active" id="home">.1</div>-->
-        <!--<div role="tabpanel" class="tab-pane" id="profile">.2</div>-->
-        <!--<div role="tabpanel" class="tab-pane" id="messages">.3</div>-->
+        
          <% (1..11).each do |i| %>
           <div role="tabpanel" class="tab-pane" id="<%= @months[i] %>" ><%= @months[i] %>月
          <% end %>
@@ -41,7 +37,7 @@
                   <th colspan="3"></th>
                 </tr>
               </thead>
-               <!--<% for account in @grouped_months[month] %>-->
+               <!--<% for account in @grouped_months[month] %><% end%>-->
                    <% @month_details[i].each do |account| %>
                 <tr>
                   <td><%= account.deadline %></td>
@@ -60,12 +56,9 @@
                 </tr>
             </tbody>
           </table>
-          
           </div>
-          
         <% end %>
       </div>
-    
     </div>
 
     <table class="table">
@@ -79,7 +72,7 @@
           </thead>
       </tbody>      
     </table>
-    
+
 <!--<script>-->
 
 <!--$('#myTab a').click(function (e) {-->
