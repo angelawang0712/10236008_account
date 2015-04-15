@@ -40,7 +40,6 @@
                   <th></th>
                   <th>月總計</th>
                   <th colspan="3"><%= @total %></th>
-                  <th><%= @month_costs[i] %></th>
                 </tr>
             </tbody>
           </table>
@@ -62,7 +61,7 @@
     </table>
 
 <script>
-$('#myTab a').click(function (e) {
+$('#myTab li:eq(<%= 4 %>) a').click(function (e) {
   e.preventDefault()
   $(this).tab('show')
 })

@@ -13,7 +13,7 @@ class AccountsController < ApplicationController
     @month_costs = []
     (0..11).each do |i|
     @month_details[i] = Account.where(["date_part('month',deadline) = ? and date_part('year',deadline) = ?" , @months[i],2015]).order('deadline desc')
-    @month_costs[i] = Account.where(["date_part('month',deadline) = ? and date_part('year',deadline) = ?" , @months[i],2015]).sum(:price)
+    # @month_costs[i] = Account.where(["date_part('month',deadline) = ? and date_part('year',deadline) = ?" , @months[i],2015]).sum(:price)
    end
     
   end
@@ -41,7 +41,7 @@ class AccountsController < ApplicationController
       if @account.save
         # format.html { redirect_to @account, notice: 'Account was successfully created.' }
         format.json { render :show, status: :created, location: @account }
-        format.html { redirect_to accounts_url, tab: 4 , notice: 'Account was successfully created.'}
+        format.html { redirect_to accounts_url, tab: 2 , notice: 'Account was successfully created.'}
       else
         format.html { render :new }
         format.json { render json: @account.errors, status: :unprocessable_entity }
