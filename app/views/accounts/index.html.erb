@@ -3,7 +3,7 @@
 <h1>Listing Accounts</h1>
 <%= link_to 'New Account', new_account_path ,class:'btn btn-success btn-lg'%>
 
-<!--<% @grouped_months.keys.sort.each do |month| %>  <% end %> -->
+<% @grouped_months.keys.sort.each do |month| %>
 <!--<h2><%= month.strftime("%B %Y") %></h2>  -->
     
     <% @total=0 %>
@@ -17,7 +17,8 @@
       <!-- Tab panes -->
       <div class="tab-content">
          <% (0..11).each do |i| %>
-          <div role="tabpanel" class="tab-pane" id="<%= @months[i] %>" ><%= @months[i] %>月
+          <div role="tabpanel" class="tab-pane" id="<%= @months[i] %>" >
+            <h2><%= @months[i] %>月</h2>
           <table class="table table-hover">
             <tbody>
               <thead>
@@ -29,6 +30,7 @@
                 </tr>
               </thead>
                <!--<% for account in @grouped_months[month] %><% end %>-->
+               <% @month_details[i].each do |account| %>  
                 <tr>
                   <td><%= account.deadline %></td>
             			<td><%= link_to account.title, account_path(account) %></td>
@@ -36,11 +38,13 @@
                   <td><%= link_to 'Edit', edit_account_path(account) ,class:'btn btn-warning'%></td>
                   <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' },class:'btn btn-danger' %></td>
                 </tr>
+               <% end %> 
                <% @total+=account.price %>
                 <tr>
                   <th></th>
                   <th>月總計</th>
                   <th colspan="3"><%= @total %></th>
+                  <th><%= @month_costs[i] %></th>
                 </tr>
             </tbody>
           </table>
@@ -60,7 +64,7 @@
           </thead>
       </tbody>      
     </table>
-
+<% end %> 
 <script>
 $('#myTab a').click(function (e) {
   e.preventDefault()
