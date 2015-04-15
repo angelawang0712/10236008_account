@@ -3,30 +3,21 @@
 <h1>Listing Accounts</h1>
 <%= link_to 'New Account', new_account_path ,class:'btn btn-success btn-lg'%>
 
-
-
 <% @grouped_months.keys.sort.each do |month| %>  
 <!--<h2><%= month.strftime("%B %Y") %></h2>  -->
     
     <% @total=0 %>
-    
     <div role="tabpanel">
-    
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist" id="myTab">
-        
          <% (0..11).each do |i| %>
           <li role="presentation"><a href="#<%= @months[i] %>" role="tab" data-toggle="tab"><%= @months[i] %>月</a></li>
         <% end %>
       </ul>
-    
       <!-- Tab panes -->
       <div class="tab-content">
-        
          <% (0..11).each do |i| %>
           <div role="tabpanel" class="tab-pane" id="<%= @months[i] %>" ><%= @months[i] %>月
-        
-          
           <table class="table table-hover">
             <tbody>
               <thead>
@@ -38,17 +29,14 @@
                 </tr>
               </thead>
                <!--<% for account in @grouped_months[month] %><% end%>-->
-                   <% @month_details[i].each do |account| %>
                 <tr>
                   <td><%= account.deadline %></td>
             			<td><%= link_to account.title, account_path(account) %></td>
             			<td><%= account.price %></td>
-                  
                   <td><%= link_to 'Edit', edit_account_path(account) ,class:'btn btn-warning'%></td>
                   <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' },class:'btn btn-danger' %></td>
                 </tr>
                <% @total+=account.price %>
-               <% end %>
                 <tr>
                   <th></th>
                   <th>月總計</th>
@@ -73,10 +61,10 @@
       </tbody>      
     </table>
  <% end %>
-<!--<script>-->
+<script>
 
-<!--$('#myTab a').click(function (e) {-->
-<!--  e.preventDefault()-->
-<!--  $(this).tab('show')-->
-<!--})-->
-<!--</script>-->
+$('#myTab a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+</script>
