@@ -79,19 +79,19 @@ $('#myTab a').click(function (e) {
     </tr>
   </thead>
   <tbody>
-  <% for cost in @grouped_months[month] %>  
-     <tr>
-        <td><%= cost.buyday %></td>
-        <td><%= cost.item %></td>
-        <td><%= cost.spendmoney.to_s(:long) %></td>
-        <td><%= link_to 'Edit', edit_cost_path(cost) %></td>
-        <td><%= link_to 'Destroy', cost, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+  <% for account in @grouped_months[month] %>  
+    <tr>
+      <td><%= account.deadline %></td>
+			<td><%= link_to account.title, account_path(account) %></td>
+			<td><%= account.price %></td>
+      <td><%= link_to 'Edit', edit_account_path(account) ,class:'btn btn-warning'%></td>
+      <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' },class:'btn btn-danger' %></td>
+    </tr>
   <% end %> 
   </tbody>
   <tr>
     <td colspan="2" style="text-align:right;">總計</td>
-    <td><%= @grouped_totals %></td>
+    <td><%= @all_total %></td>
   </tr>
 </table>
 <% end %>
