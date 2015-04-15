@@ -7,6 +7,16 @@ class AccountsController < ApplicationController
     @accounts = Account.order(:deadline)
     @grouped_months = @accounts.group_by { |r| r.deadline.beginning_of_month}
     @all_total =  Account.sum(:price)
+    @months = []
+    # (1..12).each {|m| @months << m}
+    @month_details = []
+    @month_costs = []
+    (1..12).each do |i|
+     @months[i]
+     @month_details[i] = Account.where(["date_part('month',buyday) = ? and date_part('year',buyday) = ?" , @month_num[i],2015]).order('buyday desc')
+     @month_costs[i] = Account.where(["date_part('month',buyday) = ? and date_part('year',buyday) = ?" , @month_num[i],2015]).sum(:spendmoney)
+   end
+    
   end
 
   # GET /accounts/1

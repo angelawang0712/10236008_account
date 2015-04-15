@@ -1,0 +1,101 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Costs</h1>
+<%= link_to '新增記錄', new_cost_path , class:'btn btn-success btn-lg'%>
+
+<div role="tabpanel">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#1" role="tab" data-toggle="tab">1月</a></li>
+    <% (1..11).each do |i| %>
+        <li role="presentation"><a href="#<%= @month_num[i] %>" role="tab" data-toggle="tab"><%= @month_num[i] %>月</a></li>
+    <% end %>
+  </ul>
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="1">
+    <h2>1月</h2>
+    <table class='table table-hover'>
+      <thead>
+        <tr>
+          <th>日期</th>
+          <th>項目</th>
+          <th>金額</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @month_details[0].each do |cost1| %>  
+         <tr>
+            <td><%= cost1.buyday %></td>
+            <td><%= cost1.item %></td>
+            <td><%= cost1.spendmoney.to_s(:long) %></td>
+            <td><%= link_to 'Edit', edit_cost_path(cost1) %></td>
+            <td><%= link_to 'Destroy', cost1, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %> 
+        </tbody>
+          <tr>
+            <td colspan="2" style="text-align:right;">總計</td>
+            <td><%= @month_costs[0] %></td>
+          </tr>
+    </table>
+  </div>
+    <% (1..11).each do |i| %>
+    <div role="tabpanel" class="tab-pane" id="<%= @month_num[i] %>">
+    <h2><%= i+1 %>月</h2>
+    <table class='table table-hover'>
+      <thead>
+        <tr>
+          <th>日期</th>
+          <th>項目</th>
+          <th>金額</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @month_details[i].each do |cost| %>  
+         <tr>
+            <td><%= cost.buyday %></td>
+            <td><%= cost.item %></td>
+            <td><%= cost.spendmoney.to_s(:long) %></td>
+            <td><%= link_to 'Edit', edit_cost_path(cost) %></td>
+            <td><%= link_to 'Destroy', cost, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %> 
+        </tbody>
+          <tr>
+            <td colspan="2" style="text-align:right;">總計</td>
+            <td><%= @month_costs[i] %></td>
+          </tr>
+    </table>
+  </div>
+  <% end %>
+  </div>
+</div>
+<% @grouped_months.keys.sort.each do |month| %>  
+<h2><%= month.strftime("%B %Y") %></h2>  
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>日期</th>
+      <th>項目</th>
+      <th>金額</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% for cost in @grouped_months[month] %>  
+     <tr>
+        <td><%= cost.buyday %></td>
+        <td><%= cost.item %></td>
+        <td><%= cost.spendmoney.to_s(:long) %></td>
+        <td><%= link_to 'Edit', edit_cost_path(cost) %></td>
+        <td><%= link_to 'Destroy', cost, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %> 
+  </tbody>
+  <tr>
+    <td colspan="2" style="text-align:right;">總計</td>
+    <td><%= @grouped_totals %></td>
+  </tr>
+</table>
+<% end %>
