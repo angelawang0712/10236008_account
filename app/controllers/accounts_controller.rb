@@ -8,11 +8,11 @@ class AccountsController < ApplicationController
     @grouped_months = @accounts.group_by { |r| r.deadline.beginning_of_month}
     @all_total =  Account.sum(:price)
     @months = []
-    # (1..12).each {|m| @months << m}
+    (1..12).each {|m| @months << m}
     @month_details = []
     @month_costs = []
     (0..11).each do |i|
-     @months[i]=i+1
+     
      @month_details[i] = Account.where(["date_part('month',deadline) = ? and date_part('year',deadline) = ?" , @months[i],2015]).order('deadline desc')
      @month_costs[i] = Account.where(["date_part('month',deadline) = ? and date_part('year',deadline) = ?" , @months[i],2015]).sum(:price)
    end
