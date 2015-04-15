@@ -3,10 +3,7 @@
 <h1>Listing Accounts</h1>
 <%= link_to 'New Account', new_account_path ,class:'btn btn-success btn-lg'%>
 
-<!--<% @grouped_months.keys.sort.each do |month| %> <% end %>-->
-<!--<h2><%= month.strftime("%B %Y") %></h2>  -->
-    
-    
+
     <div role="tabpanel">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist" id="myTab">
@@ -29,7 +26,7 @@
                   <th colspan="3"></th>
                 </tr>
               </thead>
-               <!--<% for account in @grouped_months[month] %><% end %>-->
+               
                <% @total=0 %>
                <% @month_details[i].each do |account| %>  
                 <tr>
@@ -72,3 +69,31 @@ $('#myTab a').click(function (e) {
   $(this).tab('show')
 })
 </script>
+<% @grouped_months.keys.sort.each do |month| %>  
+<h2><%= month.strftime("%B %Y") %></h2>  
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>日期</th>
+      <th>項目</th>
+      <th>金額</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% for cost in @grouped_months[month] %>  
+     <tr>
+        <td><%= cost.buyday %></td>
+        <td><%= cost.item %></td>
+        <td><%= cost.spendmoney.to_s(:long) %></td>
+        <td><%= link_to 'Edit', edit_cost_path(cost) %></td>
+        <td><%= link_to 'Destroy', cost, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %> 
+  </tbody>
+  <tr>
+    <td colspan="2" style="text-align:right;">總計</td>
+    <td><%= @grouped_totals %></td>
+  </tr>
+</table>
+<% end %>
