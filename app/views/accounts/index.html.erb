@@ -61,7 +61,7 @@
     </table>
 
 <script>
-$('#myTab li:eq(<%= 4 %>) a').click(function (e) {
+$('#myTab a[href="#<%=params[:tab]%>"]').click(function (e) {
   e.preventDefault()
   $(this).tab('show')
 })
